@@ -19,7 +19,7 @@ object MySparkLauncher {
     launcher.setVerbose(true) //支持SparkSubmit的详细报告。
     //.setConf(SparkLauncher.DEPLOY_MODE,"yarn-cluster")
     launcher.launch
-    val handle = launcher.startApplication()
+    val handle: SparkAppHandle = launcher.startApplication()
     while (handle.getState() != SparkAppHandle.State.FINISHED) {
       Thread.sleep(1000L)
       System.out.println("applicationId is: " + handle.getAppId)
