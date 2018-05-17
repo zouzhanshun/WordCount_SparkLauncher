@@ -19,6 +19,7 @@ object MySparkLauncher {
     launcher.setVerbose(true) //支持SparkSubmit的详细报告。
     //.setConf(SparkLauncher.DEPLOY_MODE,"yarn-cluster")
     launcher.launch
+    //TODO 线程状态的查看
     val handle: SparkAppHandle = launcher.startApplication()
     while (handle.getState() != SparkAppHandle.State.FINISHED) {
       Thread.sleep(1000L)

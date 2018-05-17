@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <profile name="Maven 1" modules="WordCount_SparkLauncher">
+      <parameters>
+        <parameter value="-dependencyfile" />
+        <parameter value="D:\workspace_idea\WordCount_SparkLauncher\target/.scala_dependencies" />
+      </parameters>
+    </profile>
+  </component>
+</project>
