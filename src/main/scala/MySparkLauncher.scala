@@ -15,22 +15,23 @@ object MySparkLauncher {
     launcher.setAppName("spark launcher")
     launcher.setConf(SparkLauncher.DRIVER_MEMORY, "2G")
     launcher.setConf(SparkLauncher.EXECUTOR_MEMORY, "2G")
-    launcher.setConf(SparkLauncher.EXECUTOR_CORES, "2")
+    launcher.setConf(SparkLauncher.EXECUTOR_CORES, "1")
     launcher.setVerbose(true) //支持SparkSubmit的详细报告。
     //.setConf(SparkLauncher.DEPLOY_MODE,"yarn-cluster")
     launcher.launch
     //TODO 线程状态的查看
     val handle: SparkAppHandle = launcher.startApplication()
     while (handle.getState() != SparkAppHandle.State.FINISHED) {
-      Thread.sleep(1000L)
-      System.out.println("applicationId is: " + handle.getAppId)
-      System.out.println("current state: " + handle.getState)
-      //handle.stop();
+      //每隔一个小时发送一下程序状态 1000*60*60
+      Thread.sleep(60000)
+      System.out.println("ApplicationId is: " + handle.getAppId + " current state: " + handle.getState)
+      if (handle.getState() == SparkAppHandle.State.FAILED) {
+        System.out.println("ApplicationId is: " + handle.getAppId + " job " + SparkAppHandle.State.FAILED)
+      }
+    }
+    if (handle.getState() == SparkAppHandle.State.FINISHED) {
+      System.out.println("ApplicationId is: " + handle.getAppId + " job " + SparkAppHandle.State.FINISHED)
     }
 
-    //    println("=============start")
-    //spark.waitFor
-    //    println("spark.waitFor(): " + spark.waitFor())
-    //    sys.exit(spark.waitFor())
   }
 }
